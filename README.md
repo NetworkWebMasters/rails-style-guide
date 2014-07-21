@@ -55,7 +55,6 @@ programming resources.
 
 ## Configuration
 
-
 * <a name="config-initializers"></a>
   Put custom initialization code in `config/initializers`. The code in
   initializers executes on application startup.
@@ -80,7 +79,6 @@ programming resources.
     config.assets.precompile += %w( rails_admin/rails_admin.css rails_admin/rails_admin.js )
     ```
 
-
 * <a name="app-config"></a>
   Keep configuration that's applicable to all environments in the
   `config/application.rb` file.
@@ -92,7 +90,6 @@ programming resources.
 <sup>[[link](#staging-like-prod)]</sup>
 
 ## Routing
-
 
 * <a name="member-collection-routes"></a>
   When you need to add more actions to a RESTful resource (do you really need
@@ -171,7 +168,6 @@ programming resources.
     resources :products
   end
   ```
-
 
 * <a name="no-wild-routes"></a>
   Never use the legacy wild controller route. This route will make all actions
@@ -464,9 +460,9 @@ programming resources.
       end
       ```
 
-    In order to convert this to a URL-friendly value, `parameterize` should be
-called on the string. The `id` of the object needs to be at the beginning so
-that it can be found by the `find` method of ActiveRecord.
+  In order to convert this to a URL-friendly value, `parameterize` should be
+  canlled on the string. The `id` of the object needs to be at the beginning so
+  that it can be found by the `find` method of ActiveRecord.
 
   * Use the `friendly_id` gem. It allows creation of human-readable URLs by
     using some descriptive attribute of the model instead of its `id`.
@@ -479,7 +475,7 @@ that it can be found by the `find` method of ActiveRecord.
       ```
 
   Check the [gem documentation](https://github.com/norman/friendly_id) for more
-information about its usage.
+  information about its usage.
 
 * <a name="find-each"></a>
   Use `find_each` to iterate over a collection of AR objects. Looping through a
@@ -556,7 +552,6 @@ information about its usage.
   Rails 3.1 way of doing the migrations - use the `change` method instead of
   `up` and `down` methods.
 <sup>[[link](#change-vs-up-down)]</sup>
-
 
   ```Ruby
   # the old way
