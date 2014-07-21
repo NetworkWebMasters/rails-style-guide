@@ -55,22 +55,28 @@ various highly regarded Rails programming resources.
 ## Configuration
 
 
-* <a name="#config-initializers"></a>
+* <a name="config-initializers"></a>
 
 Put custom initialization code in `config/initializers`. The code in
   initializers executes on application startup.
 
-* <a name="#gem-initializers"></a>
+
+<sup>[[link](#config-initializers)]</sup>
+
+* <a name="gem-initializers"></a>
 
 Keep initialization code for each gem in a separate file
   with the same name as the gem, for example `carrierwave.rb`,
   `active_admin.rb`, etc.
+<sup>[[link](#gem-initializers)]</sup>
 
-* <a name="#dev-test-prod-configs"></a>
+* <a name="dev-test-prod-configs"></a>
 
 Adjust accordingly the settings for development, test and production
   environment (in the corresponding files under `config/environments/`)
   * Mark additional assets for precompilation (if any):
+
+<sup>[[link](#dev-test-prod-configs)]</sup>
 
         ```Ruby
         # config/environments/production.rb
@@ -79,22 +85,28 @@ Adjust accordingly the settings for development, test and production
         ```
 
 
-* <a name="#app-config"></a>
+* <a name="app-config"></a>
 
 Keep configuration that's applicable to all environments in the `config/application.rb` file.
 
-* <a name="#staging-like-prod"></a>
+<sup>[[link](#app-config)]</sup>
+
+* <a name="staging-like-prod"></a>
 
 Create an additional `staging` environment that closely resembles
 the `production` one.
 
+<sup>[[link](#staging-like-prod)]</sup>
+
 ## Routing
 
 
-* <a name="#member-collection-routes"></a>
+* <a name="member-collection-routes"></a>
 
 When you need to add more actions to a RESTful resource (do you
   really need them at all?) use `member` and `collection` routes.
+
+<sup>[[link](#member-collection-routes)]</sup>
 
     ```Ruby
     # bad
@@ -117,10 +129,12 @@ When you need to add more actions to a RESTful resource (do you
     ```
 
 
-* <a name="#many-member-collection-routes"></a>
+* <a name="many-member-collection-routes"></a>
 
 If you need to define multiple `member/collection` routes use the
   alternative block syntax.
+
+<sup>[[link](#many-member-collection-routes)]</sup>
 
     ```Ruby
     resources :subscriptions do
@@ -139,10 +153,12 @@ If you need to define multiple `member/collection` routes use the
     ```
 
 
-* <a name="#nested-routes"></a>
+* <a name="nested-routes"></a>
 
 Use nested routes to express better the relationship between
   ActiveRecord models.
+
+<sup>[[link](#nested-routes)]</sup>
 
     ```Ruby
     class Post < ActiveRecord::Base
@@ -160,9 +176,11 @@ Use nested routes to express better the relationship between
     ```
 
 
-* <a name="#namespaced-routes"></a>
+* <a name="namespaced-routes"></a>
 
 Use namespaced routes to group related actions.
+
+<sup>[[link](#namespaced-routes)]</sup>
 
     ```Ruby
     namespace :admin do
@@ -173,10 +191,12 @@ Use namespaced routes to group related actions.
     ```
 
 
-* <a name="#no-wild-routes"></a>
+* <a name="no-wild-routes"></a>
 
 Never use the legacy wild controller route. This route will make all
   actions in every controller accessible via GET requests.
+
+<sup>[[link](#no-wild-routes)]</sup>
 
     ```Ruby
     # very bad
@@ -184,45 +204,59 @@ Never use the legacy wild controller route. This route will make all
     ```
 
 
-* <a name="#no-match-routes"></a>
+* <a name="no-match-routes"></a>
 
 Don't use `match` to define any routes. It's removed from Rails 4.
+
+<sup>[[link](#no-match-routes)]</sup>
 
 ## Controllers
 
 
-* <a name="#skinny-controllers"></a>
+* <a name="skinny-controllers"></a>
 
 Keep the controllers skinny - they should only retrieve data for the
   view layer and shouldn't contain any business logic (all the
   business logic should naturally reside in the model).
 
-* <a name="#one-method"></a>
+<sup>[[link](#skinny-controllers)]</sup>
+
+* <a name="one-method"></a>
 
 Each controller action should (ideally) invoke only one method other
   than an initial find or new.
 
-* <a name="#shared-instance-variables"></a>
+<sup>[[link](#one-method)]</sup>
+
+* <a name="shared-instance-variables"></a>
 
 Share no more than two instance variables between a controller and a view.
+
+<sup>[[link](#shared-instance-variables)]</sup>
 
 ## Models
 
 
-* <a name="#model-classes"></a>
+* <a name="model-classes"></a>
 
 Introduce non-ActiveRecord model classes freely.
 
-* <a name="#meaningful-model-names"></a>
+<sup>[[link](#model-classes)]</sup>
+
+* <a name="meaningful-model-names"></a>
 
 Name the models with meaningful (but short) names without
 abbreviations.
 
-* <a name="#activeattr-gem"></a>
+<sup>[[link](#meaningful-model-names)]</sup>
+
+* <a name="activeattr-gem"></a>
 
 If you need model objects that support ActiveRecord behavior(like
   validation) use the
   [ActiveAttr](https://github.com/cgriego/active_attr) gem.
+
+<sup>[[link](#activeattr-gem)]</sup>
 
     ```Ruby
     class Message
@@ -247,11 +281,13 @@ If you need model objects that support ActiveRecord behavior(like
 ### ActiveRecord
 
 
-* <a name="#keep-ar-defaults"></a>
+* <a name="keep-ar-defaults"></a>
 
 Avoid altering ActiveRecord defaults (table names, primary key, etc)
   unless you have a very good reason (like a database that's not under
   your control).
+
+<sup>[[link](#keep-ar-defaults)]</sup>
 
     ```Ruby
     # bad - don't do this if you can modify the schema
@@ -262,10 +298,12 @@ Avoid altering ActiveRecord defaults (table names, primary key, etc)
     ```
 
 
-* <a name="#macro-style-methods"></a>
+* <a name="macro-style-methods"></a>
 
 Group macro-style methods (`has_many`, `validates`, etc) in the
   beginning of the class definition.
+
+<sup>[[link](#macro-style-methods)]</sup>
 
     ```Ruby
     class User < ActiveRecord::Base
@@ -303,10 +341,12 @@ Group macro-style methods (`has_many`, `validates`, etc) in the
     ```
 
 
-* <a name="#has-many-through"></a>
+* <a name="has-many-through"></a>
 
 Prefer `has_many :through` to `has_and_belongs_to_many`. Using `has_many
 :through` allows additional attributes and validations on the join model.
+
+<sup>[[link](#has-many-through)]</sup>
 
     ```Ruby
     # using has_and_belongs_to_many
@@ -336,9 +376,11 @@ Prefer `has_many :through` to `has_and_belongs_to_many`. Using `has_many
     ```
 
 
-* <a name="#self-attribute"></a>
+* <a name="self-attribute"></a>
 
 Prefer `self[:attribute]` over `read_attribute(:attribute)`.
+
+<sup>[[link](#self-attribute)]</sup>
 
     ```Ruby
     # bad
@@ -353,10 +395,12 @@ Prefer `self[:attribute]` over `read_attribute(:attribute)`.
     ```
 
 
-* <a name="#sexy-validations"></a>
+* <a name="sexy-validations"></a>
 
 Always use the new
   ["sexy" validations](http://thelucid.com/2010/01/08/sexy-validation-in-edge-rails-rails-3/).
+
+<sup>[[link](#sexy-validations)]</sup>
 
     ```Ruby
     # bad
@@ -367,10 +411,12 @@ Always use the new
     ```
 
 
-* <a name="#custom-validator-file"></a>
+* <a name="custom-validator-file"></a>
 
 When a custom validation is used more than once or the validation is
 some regular expression mapping, create a custom validator file.
+
+<sup>[[link](#custom-validator-file)]</sup>
 
     ```Ruby
     # bad
@@ -391,19 +437,25 @@ some regular expression mapping, create a custom validator file.
     ```
 
 
-* <a name="#app-validators"></a>
+* <a name="app-validators"></a>
 
 Keep custom validators under `app/validators`.
 
-* <a name="#custom-validators-gem"></a>
+<sup>[[link](#app-validators)]</sup>
+
+* <a name="custom-validators-gem"></a>
 
 Consider extracting custom validators to a shared gem if you're
   maintaining several related apps or the validators are generic
   enough.
 
-* <a name="#named-scopes"></a>
+<sup>[[link](#custom-validators-gem)]</sup>
+
+* <a name="named-scopes"></a>
 
 Use named scopes freely.
+
+<sup>[[link](#named-scopes)]</sup>
 
     ```Ruby
     class User < ActiveRecord::Base
@@ -415,9 +467,11 @@ Use named scopes freely.
     ```
 
 
-* <a name="#named-scope-lambdas"></a>
+* <a name="named-scope-lambdas"></a>
 
 Wrap named scopes in `lambdas` to initialize them lazily (this is only a prescription in Rails 3, but is mandatory in Rails 4).
+
+<sup>[[link](#named-scope-lambdas)]</sup>
 
     ```Ruby
     # bad
@@ -438,13 +492,15 @@ Wrap named scopes in `lambdas` to initialize them lazily (this is only a prescri
     ```
 
 
-* <a name="#named-scope-class"></a>
+* <a name="named-scope-class"></a>
 
 When a named scope defined with a lambda and parameters becomes too
 complicated, it is preferable to make a class method instead which serves
 the same purpose of the named scope and returns an
 `ActiveRecord::Relation` object. Arguably you can define even simpler
 scopes like this.
+
+<sup>[[link](#named-scope-class)]</sup>
 
     ```Ruby
     class User < ActiveRecord::Base
@@ -455,17 +511,21 @@ scopes like this.
     ```
 
 
-* <a name="#beware-update-attribute"></a>
+* <a name="beware-update-attribute"></a>
 
 Beware of the behavior of the [`update_attribute`](http://api.rubyonrails.org/classes/ActiveRecord/Persistence.html#method-i-update_attribute) method. It doesn't run the model validations (unlike `update_attributes`) and could easily corrupt the model state.
 
-* <a name="#user-friendly-urls"></a>
+<sup>[[link](#beware-update-attribute)]</sup>
+
+* <a name="user-friendly-urls"></a>
 
 Use user-friendly URLs. Show some descriptive attribute of the model in the URL rather than its `id`.
 There is more than one way to achieve this:
   * Override the `to_param` method of the model. This method is used by Rails for constructing a URL to the object.
   The default implementation returns the `id` of the record as a String.
   It could be overridden to include another human-readable attribute.
+
+<sup>[[link](#user-friendly-urls)]</sup>
 
         ```Ruby
         class Person
@@ -490,7 +550,7 @@ There is more than one way to achieve this:
   Check the [gem documentation](https://github.com/norman/friendly_id) for more information about its usage.
 
 
-* <a name="#find-each"></a>
+* <a name="find-each"></a>
 
 Use `find_each` to iterate over a collection of AR objects. Looping
    through a collection of records from the database (using the `all`
@@ -498,6 +558,8 @@ Use `find_each` to iterate over a collection of AR objects. Looping
    instantiate all the objects at once. In that case, batch processing
    methods allow you to work with the records in batches, thereby
    greatly reducing memory consumption.
+
+<sup>[[link](#find-each)]</sup>
 
 
     ```Ruby
@@ -523,23 +585,31 @@ Use `find_each` to iterate over a collection of AR objects. Looping
 ## Migrations
 
 
-* <a name="#schema-version"></a>
+* <a name="schema-version"></a>
 
 Keep the `schema.rb` (or `structure.sql`) under version control.
 
-* <a name="#db-schema-load"></a>
+<sup>[[link](#schema-version)]</sup>
+
+* <a name="db-schema-load"></a>
 
 Use `rake db:schema:load` instead of `rake db:migrate` to initialize
 an empty database.
 
-* <a name="#db-test-prepare"></a>
+<sup>[[link](#db-schema-load)]</sup>
+
+* <a name="db-test-prepare"></a>
 
 Use `rake db:test:prepare` to update the schema of the test database.
 
-* <a name="#default-migration-values"></a>
+<sup>[[link](#db-test-prepare)]</sup>
+
+* <a name="default-migration-values"></a>
 
 Enforce default values in the migrations themselves instead of in
   the application layer.
+
+<sup>[[link](#default-migration-values)]</sup>
 
     ```Ruby
     # bad - application enforced default value
@@ -556,18 +626,22 @@ Enforce default values in the migrations themselves instead of in
     the Rails app is impossible.
 
 
-* <a name="#foreign-key-constraints"></a>
+* <a name="foreign-key-constraints"></a>
 
 Enforce foreign-key constraints. While ActiveRecord does not support
 them natively, there some great third-party gems like
 [schema_plus](https://github.com/lomba/schema_plus) and [foreigner](https://github.com/matthuhiggins/foreigner).
 
+<sup>[[link](#foreign-key-constraints)]</sup>
 
-* <a name="#change-vs-up-down"></a>
+
+* <a name="change-vs-up-down"></a>
 
 When writing constructive migrations (adding tables or columns), use
   the new Rails 3.1 way of doing the migrations - use the `change`
   method instead of `up` and `down` methods.
+
+<sup>[[link](#change-vs-up-down)]</sup>
 
 
     ```Ruby
@@ -591,41 +665,53 @@ When writing constructive migrations (adding tables or columns), use
     ```
 
 
-* <a name="#no-model-class-migrations"></a>
+* <a name="no-model-class-migrations"></a>
 
 Don't use model classes in migrations. The model classes are
 constantly evolving and at some point in the future migrations that
 used to work might stop, because of changes in the models used.
 
+<sup>[[link](#no-model-class-migrations)]</sup>
+
 ## Views
 
 
-* <a name="#no-direct-model-view"></a>
+* <a name="no-direct-model-view"></a>
 
 Never call the model layer directly from a view.
 
-* <a name="#no-complex-view-formatting"></a>
+<sup>[[link](#no-direct-model-view)]</sup>
+
+* <a name="no-complex-view-formatting"></a>
 
 Never make complex formatting in the views, export the formatting to
   a method in the view helper or the model.
 
-* <a name="#partials"></a>
+<sup>[[link](#no-complex-view-formatting)]</sup>
+
+* <a name="partials"></a>
 
 Mitigate code duplication by using partial templates and layouts.
+
+<sup>[[link](#partials)]</sup>
 
 ## Internationalization
 
 
-* <a name="#locale-texts"></a>
+* <a name="locale-texts"></a>
 
 No strings or other locale specific settings should be used in the views,
 models and controllers. These texts should be moved to the locale files in
 the `config/locales` directory.
 
-* <a name="#translated-labels"></a>
+<sup>[[link](#locale-texts)]</sup>
+
+* <a name="translated-labels"></a>
 
 When the labels of an ActiveRecord model need to be translated,
 use the `activerecord` scope:
+
+<sup>[[link](#translated-labels)]</sup>
 
     ```
     en:
@@ -642,7 +728,7 @@ use the `activerecord` scope:
     translations of the attributes will be used as labels in the views.
 
 
-* <a name="#organize-locale-files"></a>
+* <a name="organize-locale-files"></a>
 
 Separate the texts used in the views from translations of ActiveRecord
 attributes. Place the locale files for the models in a folder `models` and
@@ -651,26 +737,34 @@ the texts used in the views in folder `views`.
   directories, these directories must be described in the `application.rb`
   file in order to be loaded.
 
+<sup>[[link](#organize-locale-files)]</sup>
+
         ```Ruby
         # config/application.rb
         config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
         ```
 
 
-* <a name="#shared-localization"></a>
+* <a name="shared-localization"></a>
 
 Place the shared localization options, such as date or currency formats, in
 files under the root of the `locales` directory.
 
-* <a name="#short-i18n"></a>
+<sup>[[link](#shared-localization)]</sup>
+
+* <a name="short-i18n"></a>
 
 Use the short form of the I18n methods: `I18n.t` instead of `I18n.translate`
 and `I18n.l` instead of `I18n.localize`.
 
-* <a name="#lazy-lookup"></a>
+<sup>[[link](#short-i18n)]</sup>
+
+* <a name="lazy-lookup"></a>
 
 Use "lazy" lookup for the texts used in views. Let's say we have the
 following structure:
+
+<sup>[[link](#lazy-lookup)]</sup>
 
     ```
     en:
@@ -687,11 +781,13 @@ following structure:
     ```
 
 
-* <a name="#dot-separated-keys"></a>
+* <a name="dot-separated-keys"></a>
 
 Use the dot-separated keys in the controllers and models instead of
 specifying the `:scope` option. The dot-separated call is easier to read and
 trace the hierarchy.
+
+<sup>[[link](#dot-separated-keys)]</sup>
 
     ```Ruby
     # use this call
@@ -702,10 +798,12 @@ trace the hierarchy.
     ```
 
 
-* <a name="#i18n-guides"></a>
+* <a name="i18n-guides"></a>
 
 More detailed information about the Rails i18n can be found in the [Rails
 Guides](http://guides.rubyonrails.org/i18n.html)
+
+<sup>[[link](#i18n-guides)]</sup>
 
 ## Assets
 
@@ -713,39 +811,53 @@ Use the [assets pipeline](http://guides.rubyonrails.org/asset_pipeline.html) to 
 your application.
 
 
-* <a name="#reserve-app-assets"></a>
+* <a name="reserve-app-assets"></a>
 
 Reserve `app/assets` for custom stylesheets, javascripts, or images.
 
-* <a name="#lib-assets"></a>
+<sup>[[link](#reserve-app-assets)]</sup>
+
+* <a name="lib-assets"></a>
 
 Use `lib/assets` for your own libraries, that doesn’t really fit into the scope of the application.
 
-* <a name="#vendor-assets"></a>
+<sup>[[link](#lib-assets)]</sup>
+
+* <a name="vendor-assets"></a>
 
 Third party code such as [jQuery](http://jquery.com/) or [bootstrap](http://twitter.github.com/bootstrap/)
   should be placed in `vendor/assets`.
 
-* <a name="#gem-assets"></a>
+<sup>[[link](#vendor-assets)]</sup>
+
+* <a name="gem-assets"></a>
 
 When possible, use gemified versions of assets (e.g. [jquery-rails](https://github.com/rails/jquery-rails), [jquery-ui-rails](https://github.com/joliss/jquery-ui-rails), [bootstrap-sass](https://github.com/thomas-mcdonald/bootstrap-sass), [zurb-foundation](https://github.com/zurb/foundation)).
+
+<sup>[[link](#gem-assets)]</sup>
 
 ## Mailers
 
 
-* <a name="#mailer-name"></a>
+* <a name="mailer-name"></a>
 
 Name the mailers `SomethingMailer`. Without the Mailer suffix it
   isn't immediately apparent what's a mailer and which views are
   related to the mailer.
 
-* <a name="#html-plain-email"></a>
+<sup>[[link](#mailer-name)]</sup>
+
+* <a name="html-plain-email"></a>
 
 Provide both HTML and plain-text view templates.
 
-* <a name="#enable-delivery-errors"></a>
+<sup>[[link](#html-plain-email)]</sup>
+
+* <a name="enable-delivery-errors"></a>
 
 Enable errors raised on failed mail delivery in your development environment. The errors are disabled by default.
+
+<sup>[[link](#enable-delivery-errors)]</sup>
 
     ```Ruby
     # config/environments/development.rb
@@ -754,9 +866,11 @@ Enable errors raised on failed mail delivery in your development environment. Th
     ```
 
 
-* <a name="#local-smtp"></a>
+* <a name="local-smtp"></a>
 
 Use a local SMTP server like [Mailcatcher](https://github.com/sj26/mailcatcher) in the development environment.
+
+<sup>[[link](#local-smtp)]</sup>
 
     ```Ruby
     # config/environments/development.rb
@@ -769,9 +883,11 @@ Use a local SMTP server like [Mailcatcher](https://github.com/sj26/mailcatcher) 
     ```
 
 
-* <a name="#default-hostname"></a>
+* <a name="default-hostname"></a>
 
 Provide default settings for the host name.
+
+<sup>[[link](#default-hostname)]</sup>
 
     ```Ruby
     # config/environments/development.rb
@@ -786,11 +902,13 @@ Provide default settings for the host name.
     ```
 
 
-* <a name="#url-not-path-in-email"></a>
+* <a name="url-not-path-in-email"></a>
 
 If you need to use a link to your site in an email, always use the
   `_url`, not `_path` methods. The `_url` methods include the host
   name and the `_path` methods don't.
+
+<sup>[[link](#url-not-path-in-email)]</sup>
 
     ```Ruby
     # wrong
@@ -803,9 +921,11 @@ If you need to use a link to your site in an email, always use the
     ```
 
 
-* <a name="#email-addresses"></a>
+* <a name="email-addresses"></a>
 
 Format the from and to addresses properly. Use the following format:
+
+<sup>[[link](#email-addresses)]</sup>
 
     ```Ruby
     # in your mailer class
@@ -813,9 +933,11 @@ Format the from and to addresses properly. Use the following format:
     ```
 
 
-* <a name="#delivery-method-test"></a>
+* <a name="delivery-method-test"></a>
 
 Make sure that the e-mail delivery method for your test environment is set to `test`:
+
+<sup>[[link](#delivery-method-test)]</sup>
 
     ```Ruby
     # config/environments/test.rb
@@ -824,9 +946,11 @@ Make sure that the e-mail delivery method for your test environment is set to `t
     ```
 
 
-* <a name="#delivery-method-smtp"></a>
+* <a name="delivery-method-smtp"></a>
 
 The delivery method for development and production should be `smtp`:
+
+<sup>[[link](#delivery-method-smtp)]</sup>
 
     ```Ruby
     # config/environments/development.rb, config/environments/production.rb
@@ -835,7 +959,7 @@ The delivery method for development and production should be `smtp`:
     ```
 
 
-* <a name="#inline-email-styles"></a>
+* <a name="inline-email-styles"></a>
 
 When sending html emails all styles should be inline, as some mail clients
   have problems with external styles. This however makes them harder to
@@ -844,33 +968,43 @@ When sending html emails all styles should be inline, as some mail clients
   [premailer-rails](https://github.com/fphilipe/premailer-rails) and
   [roadie](https://github.com/Mange/roadie).
 
+<sup>[[link](#inline-email-styles)]</sup>
 
-* <a name="#background-email"></a>
+
+* <a name="background-email"></a>
 
 Sending emails while generating page response should be avoided. It causes
   delays in loading of the page and request can timeout if multiple email are
   sent. To overcome this emails can be sent in background process with the help
   of [sidekiq](https://github.com/mperham/sidekiq) gem.
 
+<sup>[[link](#background-email)]</sup>
+
 ## Bundler
 
 
-* <a name="#dev-test-gems"></a>
+* <a name="dev-test-gems"></a>
 
 Put gems used only for development or testing in the appropriate group in the Gemfile.
 
-* <a name="#only-good-gems"></a>
+<sup>[[link](#dev-test-gems)]</sup>
+
+* <a name="only-good-gems"></a>
 
 Use only established gems in your projects. If you're contemplating
 on including some little-known gem you should do a careful review of
 its source code first.
 
-* <a name="#os-specific-gemfile-locks"></a>
+<sup>[[link](#only-good-gems)]</sup>
+
+* <a name="os-specific-gemfile-locks"></a>
 
 OS-specific gems will by default result in a constantly changing `Gemfile.lock`
 for projects with multiple developers using different operating systems.
 Add all OS X specific gems to a `darwin` group in the Gemfile, and all Linux
 specific gems to a `linux` group:
+
+<sup>[[link](#os-specific-gemfile-locks)]</sup>
 
     ```Ruby
     # Gemfile
@@ -893,11 +1027,13 @@ specific gems to a `linux` group:
     ```
 
 
-* <a name="#gemfile-lock"></a>
+* <a name="gemfile-lock"></a>
 
 Do not remove the `Gemfile.lock` from version control. This is not
   some randomly generated file - it makes sure that all of your team
   members get the same gem versions when they do a `bundle install`.
+
+<sup>[[link](#gemfile-lock)]</sup>
 
 ## Flawed Gems
 
@@ -919,10 +1055,12 @@ This list is also a work in progress. Please, let me know if you know other popu
 ## Managing processes
 
 
-* <a name="#"></a>
+* <a name="foreman"></a>
 
 If your projects depends on various external processes use
   [foreman](https://github.com/ddollar/foreman) to manage them.
+
+<sup>[[link](#foreman)]</sup>
 
 # Further Reading
 
