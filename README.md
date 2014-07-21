@@ -4,8 +4,8 @@
 > -- Officer Alex J. Murphy / RoboCop
 
 The goal of this guide is to present a set of best practices and style
-prescriptions for Ruby on Rails 3 & 4 development. It's a complementary
-guide to the already existing community-driven
+prescriptions for Ruby on Rails 3 & 4 development. It's a
+complementary guide to the already existing community-driven
 [Ruby coding style guide](https://github.com/bbatsov/ruby-style-guide).
 
 Some of the advice here is applicable only to Rails 4.0+.
@@ -25,17 +25,18 @@ Translations of the guide are available in the following languages:
 This Rails style guide recommends best practices so that real-world Rails
 programmers can write code that can be maintained by other real-world Rails
 programmers. A style guide that reflects real-world usage gets used, and a
-style guide that holds to an ideal that has been rejected by the people it is
-supposed to help risks not getting used at all &ndash; no matter how good it is.
+style guide that holds to an ideal that has been rejected by the people it
+is supposed to help risks not getting used at all &ndash; no matter how good
+it is.
 
-The guide is separated into several sections of related rules. I've
-tried to add the rationale behind the rules (if it's omitted I've
-assumed it's pretty obvious).
+The guide is separated into several sections of related rules. I've tried to add
+the rationale behind the rules (if it's omitted I've assumed it's pretty
+obvious).
 
-I didn't come up with all the rules out of nowhere - they are mostly
-based on my extensive career as a professional software engineer,
-feedback and suggestions from members of the Rails community and
-various highly regarded Rails programming resources.
+I didn't come up with all the rules out of nowhere - they are mostly based on my
+extensive career as a professional software engineer, feedback and suggestions
+from members of the Rails community and various highly regarded Rails
+programming resources.
 
 ## Table of Contents
 
@@ -58,22 +59,21 @@ various highly regarded Rails programming resources.
 * <a name="config-initializers"></a>
 
 Put custom initialization code in `config/initializers`. The code in
-  initializers executes on application startup.
-
+initializers executes on application startup.
 
 <sup>[[link](#config-initializers)]</sup>
 
 * <a name="gem-initializers"></a>
 
-Keep initialization code for each gem in a separate file
-  with the same name as the gem, for example `carrierwave.rb`,
-  `active_admin.rb`, etc.
+Keep initialization code for each gem in a separate file with the same name as
+the gem, for example `carrierwave.rb`, `active_admin.rb`, etc.
+
 <sup>[[link](#gem-initializers)]</sup>
 
 * <a name="dev-test-prod-configs"></a>
 
-Adjust accordingly the settings for development, test and production
-  environment (in the corresponding files under `config/environments/`)
+Adjust accordingly the settings for development, test and production environment
+(in the corresponding files under `config/environments/`)
   * Mark additional assets for precompilation (if any):
 
 <sup>[[link](#dev-test-prod-configs)]</sup>
@@ -87,14 +87,15 @@ Adjust accordingly the settings for development, test and production
 
 * <a name="app-config"></a>
 
-Keep configuration that's applicable to all environments in the `config/application.rb` file.
+Keep configuration that's applicable to all environments in the
+`config/application.rb` file.
 
 <sup>[[link](#app-config)]</sup>
 
 * <a name="staging-like-prod"></a>
 
-Create an additional `staging` environment that closely resembles
-the `production` one.
+Create an additional `staging` environment that closely resembles the
+`production` one.
 
 <sup>[[link](#staging-like-prod)]</sup>
 
@@ -131,8 +132,8 @@ When you need to add more actions to a RESTful resource (do you
 
 * <a name="many-member-collection-routes"></a>
 
-If you need to define multiple `member/collection` routes use the
-  alternative block syntax.
+If you need to define multiple `member/collection` routes use the alternative
+block syntax.
 
 <sup>[[link](#many-member-collection-routes)]</sup>
 
@@ -223,8 +224,8 @@ Keep the controllers skinny - they should only retrieve data for the
 
 * <a name="one-method"></a>
 
-Each controller action should (ideally) invoke only one method other
-  than an initial find or new.
+Each controller action should (ideally) invoke only one method other than an
+initial find or new.
 
 <sup>[[link](#one-method)]</sup>
 
@@ -252,9 +253,8 @@ abbreviations.
 
 * <a name="activeattr-gem"></a>
 
-If you need model objects that support ActiveRecord behavior(like
-  validation) use the
-  [ActiveAttr](https://github.com/cgriego/active_attr) gem.
+If you need model objects that support ActiveRecord behavior(like validation)
+use the [ActiveAttr](https://github.com/cgriego/active_attr) gem.
 
 <sup>[[link](#activeattr-gem)]</sup>
 
@@ -300,8 +300,8 @@ Avoid altering ActiveRecord defaults (table names, primary key, etc)
 
 * <a name="macro-style-methods"></a>
 
-Group macro-style methods (`has_many`, `validates`, etc) in the
-  beginning of the class definition.
+Group macro-style methods (`has_many`, `validates`, etc) in the beginning of the
+class definition.
 
 <sup>[[link](#macro-style-methods)]</sup>
 
@@ -413,8 +413,8 @@ Always use the new
 
 * <a name="custom-validator-file"></a>
 
-When a custom validation is used more than once or the validation is
-some regular expression mapping, create a custom validator file.
+When a custom validation is used more than once or the validation is some
+regular expression mapping, create a custom validator file.
 
 <sup>[[link](#custom-validator-file)]</sup>
 
@@ -445,9 +445,8 @@ Keep custom validators under `app/validators`.
 
 * <a name="custom-validators-gem"></a>
 
-Consider extracting custom validators to a shared gem if you're
-  maintaining several related apps or the validators are generic
-  enough.
+Consider extracting custom validators to a shared gem if you're maintaining
+several related apps or the validators are generic enough.
 
 <sup>[[link](#custom-validators-gem)]</sup>
 
@@ -469,7 +468,8 @@ Use named scopes freely.
 
 * <a name="named-scope-lambdas"></a>
 
-Wrap named scopes in `lambdas` to initialize them lazily (this is only a prescription in Rails 3, but is mandatory in Rails 4).
+Wrap named scopes in `lambdas` to initialize them lazily (this is only a
+prescription in Rails 3, but is mandatory in Rails 4).
 
 <sup>[[link](#named-scope-lambdas)]</sup>
 
@@ -519,11 +519,12 @@ Beware of the behavior of the [`update_attribute`](http://api.rubyonrails.org/cl
 
 * <a name="user-friendly-urls"></a>
 
-Use user-friendly URLs. Show some descriptive attribute of the model in the URL rather than its `id`.
-There is more than one way to achieve this:
-  * Override the `to_param` method of the model. This method is used by Rails for constructing a URL to the object.
-  The default implementation returns the `id` of the record as a String.
-  It could be overridden to include another human-readable attribute.
+Use user-friendly URLs. Show some descriptive attribute of the model in the URL
+rather than its `id`.  There is more than one way to achieve this:
+  * Override the `to_param` method of the model. This method is used by Rails
+    for constructing a URL to the object.  The default implementation returns
+the `id` of the record as a String.  It could be overridden to include another
+human-readable attribute.
 
 <sup>[[link](#user-friendly-urls)]</sup>
 
@@ -628,9 +629,10 @@ Enforce default values in the migrations themselves instead of in
 
 * <a name="foreign-key-constraints"></a>
 
-Enforce foreign-key constraints. While ActiveRecord does not support
-them natively, there some great third-party gems like
-[schema_plus](https://github.com/lomba/schema_plus) and [foreigner](https://github.com/matthuhiggins/foreigner).
+Enforce foreign-key constraints. While ActiveRecord does not support them
+natively, there some great third-party gems like
+[schema_plus](https://github.com/lomba/schema_plus) and
+[foreigner](https://github.com/matthuhiggins/foreigner).
 
 <sup>[[link](#foreign-key-constraints)]</sup>
 
@@ -667,9 +669,9 @@ When writing constructive migrations (adding tables or columns), use
 
 * <a name="no-model-class-migrations"></a>
 
-Don't use model classes in migrations. The model classes are
-constantly evolving and at some point in the future migrations that
-used to work might stop, because of changes in the models used.
+Don't use model classes in migrations. The model classes are constantly evolving
+and at some point in the future migrations that used to work might stop, because
+of changes in the models used.
 
 <sup>[[link](#no-model-class-migrations)]</sup>
 
@@ -684,8 +686,8 @@ Never call the model layer directly from a view.
 
 * <a name="no-complex-view-formatting"></a>
 
-Never make complex formatting in the views, export the formatting to
-  a method in the view helper or the model.
+Never make complex formatting in the views, export the formatting to a method in
+the view helper or the model.
 
 <sup>[[link](#no-complex-view-formatting)]</sup>
 
@@ -700,9 +702,9 @@ Mitigate code duplication by using partial templates and layouts.
 
 * <a name="locale-texts"></a>
 
-No strings or other locale specific settings should be used in the views,
-models and controllers. These texts should be moved to the locale files in
-the `config/locales` directory.
+No strings or other locale specific settings should be used in the views, models
+and controllers. These texts should be moved to the locale files in the
+`config/locales` directory.
 
 <sup>[[link](#locale-texts)]</sup>
 
@@ -731,11 +733,11 @@ use the `activerecord` scope:
 * <a name="organize-locale-files"></a>
 
 Separate the texts used in the views from translations of ActiveRecord
-attributes. Place the locale files for the models in a folder `models` and
-the texts used in the views in folder `views`.
-  * When organization of the locale files is done with additional
-  directories, these directories must be described in the `application.rb`
-  file in order to be loaded.
+attributes. Place the locale files for the models in a folder `models` and the
+texts used in the views in folder `views`.
+  * When organization of the locale files is done with additional directories,
+    these directories must be described in the `application.rb` file in order to
+be loaded.
 
 <sup>[[link](#organize-locale-files)]</sup>
 
@@ -754,8 +756,8 @@ files under the root of the `locales` directory.
 
 * <a name="short-i18n"></a>
 
-Use the short form of the I18n methods: `I18n.t` instead of `I18n.translate`
-and `I18n.l` instead of `I18n.localize`.
+Use the short form of the I18n methods: `I18n.t` instead of `I18n.translate` and
+`I18n.l` instead of `I18n.localize`.
 
 <sup>[[link](#short-i18n)]</sup>
 
@@ -783,9 +785,9 @@ following structure:
 
 * <a name="dot-separated-keys"></a>
 
-Use the dot-separated keys in the controllers and models instead of
-specifying the `:scope` option. The dot-separated call is easier to read and
-trace the hierarchy.
+Use the dot-separated keys in the controllers and models instead of specifying
+the `:scope` option. The dot-separated call is easier to read and trace the
+hierarchy.
 
 <sup>[[link](#dot-separated-keys)]</sup>
 
@@ -825,8 +827,9 @@ Use `lib/assets` for your own libraries, that doesn’t really fit into the scop
 
 * <a name="vendor-assets"></a>
 
-Third party code such as [jQuery](http://jquery.com/) or [bootstrap](http://twitter.github.com/bootstrap/)
-  should be placed in `vendor/assets`.
+Third party code such as [jQuery](http://jquery.com/) or
+[bootstrap](http://twitter.github.com/bootstrap/) should be placed in
+`vendor/assets`.
 
 <sup>[[link](#vendor-assets)]</sup>
 
@@ -841,9 +844,8 @@ When possible, use gemified versions of assets (e.g. [jquery-rails](https://gith
 
 * <a name="mailer-name"></a>
 
-Name the mailers `SomethingMailer`. Without the Mailer suffix it
-  isn't immediately apparent what's a mailer and which views are
-  related to the mailer.
+Name the mailers `SomethingMailer`. Without the Mailer suffix it isn't
+immediately apparent what's a mailer and which views are related to the mailer.
 
 <sup>[[link](#mailer-name)]</sup>
 
@@ -855,7 +857,8 @@ Provide both HTML and plain-text view templates.
 
 * <a name="enable-delivery-errors"></a>
 
-Enable errors raised on failed mail delivery in your development environment. The errors are disabled by default.
+Enable errors raised on failed mail delivery in your development environment.
+The errors are disabled by default.
 
 <sup>[[link](#enable-delivery-errors)]</sup>
 
@@ -974,9 +977,9 @@ When sending html emails all styles should be inline, as some mail clients
 * <a name="background-email"></a>
 
 Sending emails while generating page response should be avoided. It causes
-  delays in loading of the page and request can timeout if multiple email are
-  sent. To overcome this emails can be sent in background process with the help
-  of [sidekiq](https://github.com/mperham/sidekiq) gem.
+delays in loading of the page and request can timeout if multiple email are
+sent. To overcome this emails can be sent in background process with the help of
+[sidekiq](https://github.com/mperham/sidekiq) gem.
 
 <sup>[[link](#background-email)]</sup>
 
@@ -991,9 +994,8 @@ Put gems used only for development or testing in the appropriate group in the Ge
 
 * <a name="only-good-gems"></a>
 
-Use only established gems in your projects. If you're contemplating
-on including some little-known gem you should do a careful review of
-its source code first.
+Use only established gems in your projects. If you're contemplating on including
+some little-known gem you should do a careful review of its source code first.
 
 <sup>[[link](#only-good-gems)]</sup>
 
@@ -1029,9 +1031,9 @@ specific gems to a `linux` group:
 
 * <a name="gemfile-lock"></a>
 
-Do not remove the `Gemfile.lock` from version control. This is not
-  some randomly generated file - it makes sure that all of your team
-  members get the same gem versions when they do a `bundle install`.
+Do not remove the `Gemfile.lock` from version control. This is not some randomly
+generated file - it makes sure that all of your team members get the same gem
+versions when they do a `bundle install`.
 
 <sup>[[link](#gemfile-lock)]</sup>
 
